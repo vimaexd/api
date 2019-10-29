@@ -12,6 +12,12 @@ app.get('/', (req, res) => {
     })
 })
 
+app.get('/randomquote', (req, res) => {
+    let tagarray = require("./config/randomTagline")
+    let tagrandom = Math.floor(Math.random()*tagarray.length);
+    res.send(tagarray[tagrandom])
+})
+
 app.listen(port, () => {
     let style = {
         "yellow":"\x1b[33m",

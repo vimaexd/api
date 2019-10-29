@@ -15,6 +15,7 @@ app.get('/', (req, res) => {
 app.get('/randomquote', (req, res) => {
     let tagarray = require("./config/randomTagline")
     let tagrandom = Math.floor(Math.random()*tagarray.length);
+    res.set('Access-Control-Allow-Origin', '*');
     res.send(tagarray[tagrandom])
 })
 

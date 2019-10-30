@@ -1,5 +1,5 @@
 module.exports = [
-    "No, we <b>still</b> don't have VBucks",
+    "No, we *still* don't have VBucks",
     "Error 418: I'm a teapot",
     "7777777777777",
     "[TypeError] humour not found (420:69)",

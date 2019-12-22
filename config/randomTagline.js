@@ -6,5 +6,6 @@ module.exports = [
     "h",
     "tree",
     "How much flam could a flimflam flim if a flimflam could flim flam?",
-    "File DannyDevito.exe was not found."
+    "File DannyDevito.exe was not found.",
+    "Do U Mind being Absolutely Sensible, Squirt?"
 ]

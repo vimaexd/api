@@ -86,3 +86,9 @@ typings/
 
 # DynamoDB Local files
 .dynamodb/
+
+# Database
+db/strsft.db
+
+# Keys
+config/main.json

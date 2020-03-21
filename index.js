@@ -1,8 +1,18 @@
+require("dotenv").config()
 const express = require("express")
+const bodyParser   = require('body-parser');
 const pack = require("./package.json")
+const db = require("./db/db.js")
+const colors = require("colors")
+const config = require("./config/main.json")
+const path = require("path")
 
 const app = express()
 const port = 8071
+
+app.use(express.json());
+app.use("/auth", require("./modules/auth"));
+app.use("/podcast", express.static(path.join(__dirname, 'podcast')));
 
 app.get('/', (req, res) => {
     res.json({
@@ -20,15 +30,8 @@ app.get('/randomquote', (req, res) => {
 })
 
 app.listen(port, () => {
-    let style = {
-        "yellow":"\x1b[33m",
-        "green":"\x1b[32m",
-        "bright":"\x1b[1m",
-        "reset":"\x1b[0m",
-        "blue":"\x1b[34m"
-    }
-    console.log(style.yellow + style.bright + "Stringy Software API")
-    console.log(style.green + `v${pack.version}`)
-    console.log(style.blue + "by etStringy | :ufo:")
-    console.log(`Listening on port ${port}` + style.reset)
+    console.log("Stringy Software API".yellow.bold)
+    console.log(`v${pack.version} | Running in ${process.env.NODE_ENV} mode`.green)
+    console.log("by etStringy | :ufo:".blue)
+    console.log(`Listening on port ${port}`.reset)
 })

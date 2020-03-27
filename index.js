@@ -10,8 +10,14 @@ const path = require("path")
 const app = express()
 const port = 8071
 
+
+// Squaky Clean!
+app.use(require('sanitize').middleware);
+
+
 app.use(express.json());
 app.use("/auth", require("./modules/auth"));
+app.use("/database", require("./modules/database"));
 app.use("/podcast", express.static(path.join(__dirname, 'podcast')));
 
 app.get('/', (req, res) => {

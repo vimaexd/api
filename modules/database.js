@@ -50,4 +50,29 @@ router.post('/projects', async (req, res) => {
     res.status(200)
 })
 
+router.get('/profile', async (req, res) => {
+    let discToken = req.get("X-DiscordToken")
+
+    if(!discToken) return res.send("Invalid Token!")
+
+    let disres = await fetch("https://discordapp.com/api/users/@me", {
+        method: 'get',
+        headers: {
+            authorization: `Bearer ${discToken}`
+        }
+    })
+    let userInfo = await disres.json()
+
+    // Query for Admin Permissions
+    db.all(`SELECT * FROM users WHERE discordID=${userInfo.id}`, [], (err, rows) => {
+        if(err){
+            throw err;
+        }
+        
+        if(rows === []) return res.send("User not registered in database!")
+        res.send(rows)
+    })
+
+})
+
 module.exports = router;

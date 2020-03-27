@@ -4,6 +4,7 @@ const db = require("../db/db")
 const router = express.Router()
 
 router.all('/', (req, res) => {
+    res.set('Access-Control-Allow-Origin', '*');
     res.send("Hey! What are you doing in here? Get out.")
 })
 
@@ -12,6 +13,7 @@ router.get('/projects', (req, res) => {
         if(err){
             throw err;
         }
+        res.set('Access-Control-Allow-Origin', '*');
         res.send(rows)
     })
 })
@@ -44,6 +46,7 @@ router.post('/projects', async (req, res) => {
     let dbinsert = db.prepare('INSERT INTO projects VALUES(?, ?, ?)')
 
     dbinsert.run([body.name, body.description, body.link])
+    res.set('Access-Control-Allow-Origin', '*');
     res.status(200)
 })
 

@@ -10,14 +10,24 @@ router.all('/', (req, res) => {
 })
 
 router.all('/login', (req, res) => {
-    let redirect = encodeURIComponent(req.protocol + '://' + req.get('host') + "/auth/callback");
+    let redirect;
+    if(process.env.NODE_ENV === "production"){
+        redirect = encodeURIComponent("https://api.stringy.software/auth/callback")
+    } else if(process.env.NODE_ENV === "development"){
+        redirect = encodeURIComponent(req.protocol + '://' + req.get('host') + "/auth/callback");
+    }
     res.redirect(`https://discordapp.com/oauth2/authorize?client_id=${config.discordKeys.clientID}&response_type=code&redirect_uri=${redirect}&scope=connections%20identify`)
 })
 
 router.all('/callback', async (req, res) => {
     let code = req.query.code
     let creds = btoa(`${config.discordKeys.clientID}:${config.discordKeys.clientSecret}`);
-    let redirect = encodeURIComponent(req.protocol + '://' + req.get('host') + "/auth/callback");
+    let redirect;
+    if(process.env.NODE_ENV === "production"){
+        redirect = encodeURIComponent("https://api.stringy.software/auth/callback")
+    } else if(process.env.NODE_ENV === "development"){
+        redirect = encodeURIComponent(req.protocol + '://' + req.get('host') + "/auth/callback");
+    }
 
     // check if a code was provided
     let url;
@@ -37,10 +47,11 @@ router.all('/callback', async (req, res) => {
       },
     });
     const json = await response.json();
-    
-    res.cookie('access_token', json.access_token, {domain: url, maxAge: 1209600000});
-    res.cookie('token_type', json.token_type, {domain: url, maxAge: 1209600000});
 
+    // res.cookie('loggedin', 'true', {domain: "http://localhost:8080"})
+    // res.cookie('access_token', json.access_token, {domain: url, maxAge: 1209600000, httpOnly: false});
+    // res.cookie('token_type', json.token_type, {domain: url, maxAge: 1209600000, httpOnly: false});
+    
     // // Get basic info
     fetch("https://discordapp.com/api/users/@me", {
         method: 'get',
@@ -62,7 +73,7 @@ router.all('/callback', async (req, res) => {
         })
     })
 
-    res.redirect(url)
+    res.redirect(url + `/setCookie?access_token=${json.access_token}&token_type=${json.token_type}`)
 })
 
 module.exports = router;

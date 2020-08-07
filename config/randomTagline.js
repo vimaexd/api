@@ -20,5 +20,6 @@ module.exports = [
     "I, EvaX, humbly submit a toas-",
     "one yam",
     "Compiler error at Line 52",
-    "bodge"
+    "bodge",
+    "delete this"
 ]

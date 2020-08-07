@@ -8,5 +8,16 @@ module.exports = [
     "How much flam could a flimflam flim if a flimflam could flim flam?",
     "File DannyDevito.exe was not found.",
     "Do U Mind being Absolutely Sensible, Squirt?",
-    "SHU UHSU HSUFHDpebnfgwpeew"
+    "SHU UHSU HSUFHDpebnfgwpeew",
+    "Fluting since 2020",
+    "nom",
+    "uwu",
+    "owowowowowowowo",
+    "who the fuck made this thing",
+    "Cheer1 Cheer1 Cheer1 Cheer1 Cheer1 Cheer1",
+    "nice logo",
+    "elseif elseif elseif elseif elseif elseif",
+    "I, EvaX, humbly submit a toas-",
+    "one yam",
+    "Compiler error at Line 52"
 ]

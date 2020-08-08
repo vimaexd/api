@@ -34,6 +34,7 @@ router.post('/projects', async (req, res) => {
         }
     })
     let userInfo = await disres.json()
+    if(userInfo.code < 0 ) return res.json({status: 403})
 
     console.log("Writing new project...")
     console.log("Body: " + JSON.stringify(req.body))
@@ -76,7 +77,8 @@ router.post('/deleteProject', async (req, res) => {
         }
     })
     let userInfo = await disres.json()
-
+    if(userInfo.code < 0 ) return res.json({status: 403})
+    
     console.log("Deleting project..")
     console.log("Body: " + JSON.stringify(req.body))
     db.serialize(() => {
@@ -105,7 +107,6 @@ router.post('/deleteProject', async (req, res) => {
 
 router.get('/profile', async (req, res) => {
     res.set('Access-Control-Allow-Origin', '*');
-    
     let discToken = req.get("X-DiscordToken")
 
     if(!discToken) return res.send("Invalid Token!")
@@ -117,6 +118,7 @@ router.get('/profile', async (req, res) => {
         }
     })
     let userInfo = await disres.json()
+    if(userInfo.code < 0 ) return res.json({status: 403})
     
     // Query for Admin Permissions
     db.all(`SELECT * FROM users WHERE discordID=${userInfo.id}`, [], (err, rows) => {

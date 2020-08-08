@@ -104,6 +104,8 @@ router.post('/deleteProject', async (req, res) => {
 })
 
 router.get('/profile', async (req, res) => {
+    res.set('Access-Control-Allow-Origin', '*');
+    
     let discToken = req.get("X-DiscordToken")
 
     if(!discToken) return res.send("Invalid Token!")
@@ -115,8 +117,6 @@ router.get('/profile', async (req, res) => {
         }
     })
     let userInfo = await disres.json()
-
-    res.set('Access-Control-Allow-Origin', '*');
     
     // Query for Admin Permissions
     db.all(`SELECT * FROM users WHERE discordID=${userInfo.id}`, [], (err, rows) => {

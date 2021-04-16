@@ -1,6 +1,6 @@
 {
   "name": "api",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "The API for https://stringy.software. 🛸",
   "main": "src/index.ts",
   "repository": "http://github.com/etstringy/api",
@@ -20,6 +20,7 @@
     "typescript": "^4.2.4"
   },
   "scripts": {
+    "build": "tsc",
     "start": "ts-node-dev --respawn --transpile-only src/index.ts"
   },
   "devDependencies": {

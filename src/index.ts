@@ -17,7 +17,7 @@ const twitch = new Twitch();
 */
 
 app.get('/', (req: Request, res: Response) => res.send('OwO'));
-app.get('/twitch', (req: Request, res: Response) =>
+app.get('/twitch/:channel', (req: Request, res: Response) =>
   twitch.getChannel(req, res),
 );
 

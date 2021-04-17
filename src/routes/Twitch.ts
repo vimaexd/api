@@ -73,7 +73,7 @@ class Twitch {
           'Client-Id': process.env.TWITCH_CLIENTID,
         },
         params: {
-          query: 'etstringy',
+          query: req.params.channel || 'etstringy',
           first: '1',
         },
       })

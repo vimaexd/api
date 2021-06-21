@@ -1,11 +1,15 @@
 import {Request, Response} from 'express';
 import axios from 'axios';
+import Log from '../utils/Log';
+
+const l = new Log({prefix: 'Twitch'});
 
 /**
  * Class for getting Twitch channel info for the API
  */
 class Twitch {
     private accessToken: string;
+    private loggingPrefix: string;
 
     /**
      * Initialize class variables
@@ -21,6 +25,7 @@ class Twitch {
      */
     private async initialize() {
       await this.getOAuth();
+      l.log('Connected to Twitch API!');
     }
 
     /**
@@ -44,8 +49,10 @@ class Twitch {
 
         if (!res.data.access_token) return;
         token = res.data.access_token;
+        setTimeout(this.getOAuth, res.data.expires_in);
+        l.log(`Twitch API token renewed!`);
       } catch (err) {
-        console.log(`[Twitch] Error getting creds - ${err.response.data}`);
+        l.log(`Auth error! - ${err}`);
       }
 
       this.accessToken = token;
@@ -78,7 +85,10 @@ class Twitch {
         },
       })
           .then((twitchRes) => {
-            return res.send(twitchRes.data.data[0]);
+            return res.json({success: true, ...twitchRes.data.data[0]});
+          })
+          .catch((err) => {
+            return res.json({success: false});
           });
     }
 }

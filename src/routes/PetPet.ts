@@ -39,9 +39,11 @@ export default class PetPet {
   async generateGif(req: Request, res: Response) {
     if (!req.params.id) return res.json({success: false, description: 'No user ID supplied!'});
 
+    const id = req.params.id.replace('.gif', '');
+
     // get user information
     try {
-      const _info = await discord.getUserById(req.params.id);
+      const _info = await discord.getUserById(id);
       const info = _info.data;
       const cacheFilename = `${info.id}-${info.avatar}.gif`;
       const cachePath = path.join(this.cacheFolder, cacheFilename);

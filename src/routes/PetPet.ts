@@ -43,7 +43,7 @@ export default class PetPet {
     try {
       const _info = await discord.getUserById(req.params.id);
       const info = _info.data;
-      const cacheFilename = `${info.id}-${info.avatar}.png`;
+      const cacheFilename = `${info.id}-${info.avatar}.gif`;
       const cachePath = path.join(this.cacheFolder, cacheFilename);
 
       if (fs.existsSync(cacheFilename)) return res.sendFile(cachePath);

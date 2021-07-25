@@ -3,16 +3,16 @@ module.exports = {
     es2021: true,
     node: true,
   },
-  extends: ["google"],
-  parser: "@typescript-eslint/parser",
+  extends: ['google'],
+  parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 12,
-    sourceType: "module",
+    sourceType: 'module',
   },
-  plugins: ["@typescript-eslint"],
+  plugins: ['@typescript-eslint'],
   rules: {
-    "max-len": [
-      "error",
+    'max-len': [
+      'error',
       80,
       2,
       {

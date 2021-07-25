@@ -49,12 +49,23 @@ export default class Discord {
     }
 
     /**
-     * Get Twitch Channel API Route
+     * Get Discord user by ID
+     * @param {string} id Express Request
+     * @return {AxiosResponse} Axios response
+     */
+    getUserById(id: string) {
+      return this.api({
+        url: '/users/' + id,
+      });
+    }
+
+    /**
+     * Get Discord user by ID
      * @param {Request} req Express Request
      * @param {Response} res Express Response
      * @return {Response} Express Response
      */
-    getUserById(req: Request, res: Response) {
+    getUserRoute(req: Request, res: Response) {
       if (!this.validToken) {
         return res.json({
           success: false,
@@ -62,9 +73,7 @@ export default class Discord {
         });
       }
 
-      this.api({
-        url: '/users/' + req.params.id,
-      })
+      this.getUserById(req.params.id)
           .then((discord) => {
             return res.json({success: true, user: discord.data});
           })

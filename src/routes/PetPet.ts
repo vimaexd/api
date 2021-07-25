@@ -40,14 +40,20 @@ export default class PetPet {
     if (!req.params.id) return res.json({success: false, description: 'No user ID supplied!'});
 
     // get user information
-    const _info = await discord.getUserById(req.params.id);
-    const info = _info.data;
-    const cacheFilename = `${info.id}-${info.avatar}.png`;
-    const cachePath = path.join(this.cacheFolder, cacheFilename);
+    try {
+      const _info = await discord.getUserById(req.params.id);
+      const info = _info.data;
+      const cacheFilename = `${info.id}-${info.avatar}.png`;
+      const cachePath = path.join(this.cacheFolder, cacheFilename);
 
-    if (fs.existsSync(cacheFilename)) return res.sendFile(cachePath);
-    const uwu = await petpet(`https://cdn.discordapp.com/avatars/${info.id}/${info.avatar}.png?size=1024`);
-    fs.writeFileSync(cachePath, uwu);
-    res.sendFile(cachePath);
+      if (fs.existsSync(cacheFilename)) return res.sendFile(cachePath);
+      const uwu = await petpet(`https://cdn.discordapp.com/avatars/${info.id}/${info.avatar}.png?size=1024`);
+      fs.writeFileSync(cachePath, uwu);
+
+      res.set('Content-Type', 'image/gif');
+      res.sendFile(cachePath);
+    } catch (err) {
+      res.json({success: false, description: 'An unknown error occured!'});
+    }
   }
 }

@@ -28,7 +28,7 @@ export default class EShop {
      * Initialize function to run other functions asyncronously
      */
     private async initialize() {
-      this.cacheFolder = path.join(__dirname, '../../', 'cache', 'eshop');
+      this.cacheFolder = path.join(__dirname, '..', '..', 'cache', 'eshop');
       this.cachePath = path.join(this.cacheFolder, "data.json");
       fs.mkdirSync(this.cacheFolder, {recursive: true});
 

@@ -47,7 +47,7 @@ app.get('/pet/:id', (req: Request, res: Response) => petpet.generateGif(req, res
 
 /* EShop */
 app.get('/eshop/all', (req: Request, res: Response) => lawyered.allRoute(req, res));
-app.get('/eshop/search/', (req: Request, res: Response) => lawyered.searchRoute(req, res));
+app.get('/eshop/search', (req: Request, res: Response) => lawyered.searchRoute(req, res));
 app.get('/eshop/music', (req: Request, res: Response) => lawyered.randomMusicRoute(req, res));
 
 app.listen(9090, () => {

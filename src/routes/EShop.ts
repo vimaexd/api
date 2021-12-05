@@ -32,6 +32,7 @@ export default class EShop {
       this.cachePath = path.join(this.cacheFolder, "data.json");
       fs.mkdirSync(this.cacheFolder, {recursive: true});
 
+      l.log(`Data cache path is ${this.cachePath}`)
       if(!fs.existsSync(this.cachePath)){
         l.log("Data cache does not exist, creating")
         fs.writeFileSync(this.cachePath, JSON.stringify(this.eshopData), {encoding: "utf-8"})

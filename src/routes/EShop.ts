@@ -33,7 +33,7 @@ export default class EShop {
       fs.mkdirSync(this.cacheFolder, {recursive: true});
 
       if(!fs.existsSync(this.cachePath)){
-        fs.writeFileSync(this.cachePath, this.eshopData, {encoding: "utf-8"})
+        fs.writeFileSync(this.cachePath, JSON.stringify(this.eshopData), {encoding: "utf-8"})
       } else {
         this.eshopData = JSON.parse(fs.readFileSync(this.cachePath, {encoding: "utf-8"}));
       }

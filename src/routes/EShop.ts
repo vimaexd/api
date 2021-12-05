@@ -38,7 +38,7 @@ export default class EShop {
         this.eshopData = JSON.parse(fs.readFileSync(this.cachePath, {encoding: "utf-8"}));
       }
       
-      // this.updateGames();
+      this.updateGames();
       l.log("E-Shop started")
     }
 

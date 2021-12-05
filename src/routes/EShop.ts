@@ -33,8 +33,10 @@ export default class EShop {
       fs.mkdirSync(this.cacheFolder, {recursive: true});
 
       if(!fs.existsSync(this.cachePath)){
+        l.log("Data cache does not exist, creating")
         fs.writeFileSync(this.cachePath, JSON.stringify(this.eshopData), {encoding: "utf-8"})
       } else {
+        l.log("Data cache exists! Loading")
         this.eshopData = JSON.parse(fs.readFileSync(this.cachePath, {encoding: "utf-8"}));
       }
       

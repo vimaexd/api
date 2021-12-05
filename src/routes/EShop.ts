@@ -97,7 +97,7 @@ export default class EShop {
     }
 
     randomMusicRoute(req: Request, res: Response) {
-      const musicPath = path.join(__dirname, "..", "music", "eshop");
+      const musicPath = path.join(__dirname, "..", "..", "assets", "music", "eshop");
       const music = fs.readdirSync(musicPath)
 
       const track = music[Math.floor(Math.random() * music.length)];
